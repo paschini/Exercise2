@@ -1,4 +1,5 @@
 ﻿
+
 namespace Exercise2
 {
     internal class Program
@@ -45,36 +46,64 @@ namespace Exercise2
 
             const double youngPrice = 80;
             const double retiredPrice = 90;
+            const double standardPrice = 120;
 
             string choice = "Y";
             while (choice == "Y"){
                 Console.Clear();
                 Console.WriteLine("På detta funktion kand du kolla om en person får ungdoms- eller pensionärsrabatt på Bio pris.");
-                Console.Write("\nAnge personens ålder: ");
+                Console.WriteLine("--------------------------------------------------------------");
+                Console.WriteLine("Testa ålder på (E)n person eller (F)lera? Skriva E eller F. Skriva nått annat för att gå tillbacka.");
+                choice = Console.ReadLine() ?? "E";
 
-                int age;
-                while (!int.TryParse(Console.ReadLine(), out age) || age < 0)
+                if (choice.ToUpper() == "E")
                 {
-                    Console.Write("Ogiltig inmatning. Vänligen ange en giltig ålder: ");
-                }
+                    Console.Write("\nAnge personens ålder: ");
 
-                if (age < 20)
-                {
-                    Console.WriteLine($"Personen är berättigad till ungdomspris: {youngPrice:C2}.");
-                    Console.Write($"Testa en till persons ålder? ");
-                    choice = Console.ReadLine() ?? "N";
+                    int age;
+                    while (!int.TryParse(Console.ReadLine(), out age) || age < 0)
+                    {
+                        Console.Write("Ogiltig inmatning. Vänligen ange en giltig ålder: ");
+                    }
+
+                    if (age < 20)
+                    {
+                        Console.WriteLine($"Personen är berättigad till ungdomspris: {youngPrice:C2}.");
+                        Console.Write($"Testa en till persons ålder? Trycka på Y eller N");
+                        choice = Console.ReadLine() ?? "N";
+                    }
+                    else if (age >= 64)
+                    {
+                        Console.WriteLine($"Personen är berättigad till pensionärspris: {retiredPrice:C2}.");
+                        Console.Write($"Testa en till persons ålder? Trycka på Y eller N");
+                        choice = Console.ReadLine() ?? "N";
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Personen är inte berättigad till någon rabatt. Standard pris är: {standardPrice}");
+                        Console.Write($"Testa en till persons ålder? Trycka på Y eller N");
+                        choice = Console.ReadLine() ?? "N";
+                    }
                 }
-                else if (age >= 64)
-                {
-                    Console.WriteLine($"Personen är berättigad till pensionärspris: {retiredPrice:C2}.");
-                    Console.Write($"Testa en till persons ålder? ");
-                    choice = Console.ReadLine() ?? "N";
-                }
-                else
-                {
-                    Console.WriteLine("Personen är inte berättigad till någon rabatt.  Tryck Y försöka igen, på valfri tangent för att gå tillbacka.");
-                    choice = Console.ReadLine() ?? "N";
-                }
+                else {
+                    GroupPrice();   
+                }   
+            }
+        }
+
+        private static void GroupPrice()
+        {
+            Console.Write("\nAnge hur många personer finns i din grupp: ");
+
+            int numberOfPeople;
+            while (!int.TryParse(Console.ReadLine(), out numberOfPeople) || numberOfPeople < 1)
+            {
+                Console.Write("Ogiltig inmatning. Vänligen ange en giltig nummer av personer: ");
+            }
+
+            for (int i = 1; i <= numberOfPeople; i++)
+            {
+                
             }
         }
     }
