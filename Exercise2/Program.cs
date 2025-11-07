@@ -16,10 +16,11 @@
                 Console.WriteLine("Välkomen till HuvudMeny");
                 Console.WriteLine("\nSkriva en av nerstående siffror följd med <Enter> för att navigera till en function:");
                 Console.WriteLine("--------------------------------------------------------------------------------------");
-                Console.WriteLine("0 - Stäng ner programmet");
+                Console.WriteLine("0 - Stäng ner programmet\n");
                 Console.WriteLine("1 - Räkna Bio pris till en person eller flera\n"); // har en submeny för att välja en eller flera personer
                 Console.WriteLine("2 - Räkna Bio pris till en grupp\n"); // har inget submeny, bara räkna pris för gruppen en gång
-                Console.WriteLine("2 - Upprepa inmatning 10 gånger\n");
+                Console.WriteLine("3 - Upprepa inmatning 10 gånger\n");
+                Console.WriteLine("4 - Hitta 3:e ordet i en mening\n");
 
                 string input = Console.ReadLine() ?? "0";
                 switch (input)
@@ -35,6 +36,9 @@
                         break;
                     case "3":
                         RepeatInput();
+                        break;
+                    case "4":
+                        Find3rdWord();
                         break;
                     default:
                         Console.WriteLine("Ogiltigt val. Tryck på valfri tangent för att försöka igen.");
@@ -76,7 +80,12 @@
 
                     double price = CalculatePersonPrice(age);
 
-                    if (age < 20)
+                    if (age < 5)
+                    {
+                        Console.WriteLine($"Barn är under 5 år tittar grattis på Bio: {price:C2}.");
+                        Console.Write($"Testa en till persons ålder? Trycka på Y eller N: ");
+                        choice = Console.ReadLine() ?? "N";
+                    } else if (age < 20)
                     {
                         Console.WriteLine($"Personen är berättigad till ungdomspris: {price:C2}.");
                         Console.Write($"Testa en till persons ålder? Trycka på Y eller N: ");
@@ -85,6 +94,12 @@
                     else if (age >= 64)
                     {
                         Console.WriteLine($"Personen är berättigad till ungdomspris: {price:C2}.");
+                        Console.Write($"Testa en till persons ålder? Trycka på Y eller N: ");
+                        choice = Console.ReadLine() ?? "N";
+                    }
+                    else if (age > 100)
+                    {
+                        Console.WriteLine($"Personen är över 100 år! Tittar grattis på Bio: {price:C2}.");
                         Console.Write($"Testa en till persons ålder? Trycka på Y eller N: ");
                         choice = Console.ReadLine() ?? "N";
                     }
@@ -98,6 +113,8 @@
                 else if(choice.ToUpper() == "F") {
                     // Det menar att användaren vill hantera en grupp och få total pris.
                     // "F" för Flera ska bara kalkylera pris för gruppen en gång.
+                    // om vi vill låta användaren kalkylera flera grupp, behöver vi bara okommentera ut "choice = "Y";" nedan.
+                    // choice = "Y";
                     GroupPrice();   
                 }   
             }
@@ -109,13 +126,18 @@
             const double retiredPrice = 90;
             const double standardPrice = 120;
 
-            if (age < 20)
+            if (age < 5)
+            {
+                return 0;
+            } else if (age < 20)
             {
                 return youngPrice;
-            }
-            else if (age >= 64)
+            } else if (age >= 64)
             {
                 return retiredPrice;
+            } else if (age > 100)
+            {
+                return 0;
             }
             else
             {
@@ -166,14 +188,41 @@
                 for (int i = 0; i < 10; i++)
                 {
                     if (i < 9)
-                        Console.Write($"{i + 1}: {input}, ");
+                        Console.Write($"{i + 1}. {input}, ");
                     else
-                        Console.Write($"{i + 1}: {input}.");
+                        Console.Write($"{i + 1}. {input}.");
                 }
             }
             else
             {
                 Console.WriteLine("Ingen inmatning att upprepa.");
+            }
+            Console.ReadLine(); // bara för att användare ska få läsa resultatet innan gå tillbacka till huvudmeny
+        }
+
+        private static void Find3rdWord()
+        {
+            bool exitFunction = false;
+            while (!exitFunction)
+            {
+                Console.Clear();
+                Console.WriteLine("På denna funktion hittar du det 3:e ordet i en mening.");
+                Console.Write("\nAnge en mening med minst 3 ord: ");
+
+                string input = Console.ReadLine() ?? "";
+                string[] words = input.Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+
+                if (words.Length >= 3)
+                {
+                    Console.WriteLine($"Det 3:e ordet i din mening är: \"{words[2]}\".");
+                    exitFunction = true;
+                }
+                else
+                {
+                    Console.WriteLine("Mening innehåller mindre än 3 ord. Vänligen försök igen med en längre mening.");
+                    Console.WriteLine("Kolla också  att det finns inte   flera   mellanslag tillsammans i   mening.");
+                    Console.ReadLine();
+                }
             }
             Console.ReadLine(); // bara för att användare ska få läsa resultatet innan gå tillbacka till huvudmeny
         }
