@@ -78,18 +78,18 @@
                         Console.Write("Ogiltig inmatning. Vänligen ange en giltig ålder: ");
                     }
 
-                    PriceResult price = CalculatePersonPrice(age);
-                    Console.WriteLine(price.Message);
+                    Console.WriteLine(CalculatePersonPrice(age).Message);
                     Console.Write($"Testa en till persons ålder? Trycka på Y eller N: ");
                     choice = Console.ReadLine() ?? "N";
                 }
-                else if(choice.ToUpper() == "F") {
+                else if (choice.ToUpper() == "F")
+                {
                     // Det menar att användaren vill hantera en grupp och få total pris.
                     // "F" för Flera ska bara kalkylera pris för gruppen en gång.
                     // om vi vill låta användaren kalkylera flera grupp, behöver vi bara okommentera ut "choice = "Y";" nedan.
                     // choice = "Y";
-                    GroupPrice();   
-                }   
+                    GroupPrice();
+                }
             }
         }
 
@@ -108,17 +108,20 @@
                 result.Price = 0;
                 result.Message = $"Barn under 5 år tittar grattis på Bio: {result.Price:C2}";
                 return result;
-            } else if (age < 20)
+            }
+            else if (age < 20)
             {
                 result.Price = youngPrice;
                 result.Message = $"Personen är berättigad till ungdomspris: {result.Price:C2}";
                 return result;
-            } else if (age >= 64)
+            }
+            else if (age >= 64)
             {
                 result.Price = retiredPrice;
                 result.Message = $"Personen är berättigad till pensionärspris: {result.Price:C2}";
                 return result;
-            } else if (age > 100)
+            }
+            else if (age > 100)
             {
                 result.Price = 0;
                 result.Message = $"Personen är över 100 år! Tittar grattis på Bio: {result.Price:C2}";
