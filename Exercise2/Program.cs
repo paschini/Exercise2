@@ -78,37 +78,10 @@
                         Console.Write("Ogiltig inmatning. Vänligen ange en giltig ålder: ");
                     }
 
-                    double price = CalculatePersonPrice(age);
-
-                    if (age < 5)
-                    {
-                        Console.WriteLine($"Barn är under 5 år tittar grattis på Bio: {price:C2}.");
-                        Console.Write($"Testa en till persons ålder? Trycka på Y eller N: ");
-                        choice = Console.ReadLine() ?? "N";
-                    } else if (age < 20)
-                    {
-                        Console.WriteLine($"Personen är berättigad till ungdomspris: {price:C2}.");
-                        Console.Write($"Testa en till persons ålder? Trycka på Y eller N: ");
-                        choice = Console.ReadLine() ?? "N";
-                    }
-                    else if (age >= 64)
-                    {
-                        Console.WriteLine($"Personen är berättigad till ungdomspris: {price:C2}.");
-                        Console.Write($"Testa en till persons ålder? Trycka på Y eller N: ");
-                        choice = Console.ReadLine() ?? "N";
-                    }
-                    else if (age > 100)
-                    {
-                        Console.WriteLine($"Personen är över 100 år! Tittar grattis på Bio: {price:C2}.");
-                        Console.Write($"Testa en till persons ålder? Trycka på Y eller N: ");
-                        choice = Console.ReadLine() ?? "N";
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Personen är berättigad till ungdomspris: {price:C2}.");
-                        Console.Write($"Testa en till persons ålder? Trycka på Y eller N: ");
-                        choice = Console.ReadLine() ?? "N";
-                    }
+                    PriceResult price = CalculatePersonPrice(age);
+                    Console.WriteLine(price.Message);
+                    Console.Write($"Testa en till persons ålder? Trycka på Y eller N: ");
+                    choice = Console.ReadLine() ?? "N";
                 }
                 else if(choice.ToUpper() == "F") {
                     // Det menar att användaren vill hantera en grupp och få total pris.
@@ -120,29 +93,49 @@
             }
         }
 
-        private static double CalculatePersonPrice(int age)
+        private static PriceResult CalculatePersonPrice(int age)
         {
             const double youngPrice = 80;
             const double retiredPrice = 90;
             const double standardPrice = 120;
 
+            PriceResult result = new PriceResult();
+            // kanske lite överdrivet, men med en record kan vi lätt lägga till fler properties i framtiden om det behövs.
+            // löser problemet med a upprepa pris logiken i flera ställen.
+
             if (age < 5)
             {
-                return 0;
+                result.Price = 0;
+                result.Message = $"Barn under 5 år tittar grattis på Bio: {result.Price:C2}";
+                return result;
             } else if (age < 20)
             {
-                return youngPrice;
+                result.Price = youngPrice;
+                result.Message = $"Personen är berättigad till ungdomspris: {result.Price:C2}";
+                return result;
             } else if (age >= 64)
             {
-                return retiredPrice;
+                result.Price = retiredPrice;
+                result.Message = $"Personen är berättigad till pensionärspris: {result.Price:C2}";
+                return result;
             } else if (age > 100)
             {
-                return 0;
+                result.Price = 0;
+                result.Message = $"Personen är över 100 år! Tittar grattis på Bio: {result.Price:C2}";
+                return result;
             }
             else
             {
-                return standardPrice;
+                result.Price = standardPrice;
+                result.Message = $"Personen är berättigad till standardpris: {result.Price:C2}";
+                return result;
             }
+        }
+
+        private record PriceResult
+        {
+            public double Price { get; set; }
+            public string Message { get; set; } = "Pris är inte sätt.";
         }
 
         private static void GroupPrice()
@@ -168,7 +161,7 @@
                 {
                     Console.Write("Ogiltig inmatning. Vänligen ange en giltig ålder: ");
                 }
-                totalPrice += CalculatePersonPrice(age);
+                totalPrice += CalculatePersonPrice(age).Price;
             }
 
             Console.WriteLine($"\nTotala priset för gruppen med {numberOfPeople} personner är: {totalPrice:C2}.");
