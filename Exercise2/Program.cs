@@ -1,6 +1,4 @@
-﻿
-
-namespace Exercise2
+﻿namespace Exercise2
 {
     internal class Program
     {
@@ -19,7 +17,9 @@ namespace Exercise2
                 Console.WriteLine("\nSkriva en av nerstående siffror följd med <Enter> för att navigera till en function:");
                 Console.WriteLine("--------------------------------------------------------------------------------------");
                 Console.WriteLine("0 - Stäng ner programmet");
-                Console.WriteLine("1 - Ungdom eller Pensionär?\n");
+                Console.WriteLine("1 - Räkna Bio pris till en person eller flera\n"); // har en submeny för att välja en eller flera personer
+                Console.WriteLine("2 - Räkna Bio pris till en grupp\n"); // har inget submeny, bara räkna pris för gruppen en gång
+                Console.WriteLine("2 - Upprepa inmatning 10 gånger\n");
 
                 string input = Console.ReadLine() ?? "0";
                 switch (input)
@@ -29,6 +29,12 @@ namespace Exercise2
                         break;
                     case "1":
                         YoungOrRetired();
+                        break;
+                    case "2":
+                        GroupPrice();
+                        break;
+                    case "3":
+                        RepeatInput();
                         break;
                     default:
                         Console.WriteLine("Ogiltigt val. Tryck på valfri tangent för att försöka igen.");
@@ -49,7 +55,7 @@ namespace Exercise2
             {
                 // för att försätta testa personen, man måste ange Y när vi frågar "Y" eller "N". Nått annat går tillbacka till huvudmeny
                 Console.Clear();
-                Console.WriteLine("På detta funktion kand du få Bio pris till en person eller flera.\nVi räknar ut med ungdoms och pensionärs rabbat.");
+                Console.WriteLine("På denna funktion ska du få Bio pris till en person eller flera.\nVi räknar ut med ungdoms och pensionärs rabbat.");
                 Console.WriteLine("--------------------------------------------------------------");
                 Console.WriteLine("Pris till (E)n person eller få en antal pris till (F)lera? \nSkriva E eller F. Skriva nått annat för att gå tillbacka.");
                 choice = Console.ReadLine() ?? "E";
@@ -119,6 +125,8 @@ namespace Exercise2
 
         private static void GroupPrice()
         {
+            Console.Clear();
+            Console.WriteLine("På denna funktion ska du få Bio pris till en grupp.\nVi räknar ut med ungdoms och pensionärs rabbat.");
             Console.Write("\nAnge hur många personer finns i din grupp: ");
 
             int numberOfPeople;
@@ -142,6 +150,31 @@ namespace Exercise2
             }
 
             Console.WriteLine($"\nTotala priset för gruppen med {numberOfPeople} personner är: {totalPrice:C2}.");
+            Console.ReadLine(); // bara för att användare ska få läsa resultatet innan gå tillbacka till huvudmeny
+        }
+
+        private static void RepeatInput()
+        {
+            Console.Clear();
+            Console.WriteLine("På denna funktion upprepar din inmatning 10 gånger.\nTexten som du skriver in måste vara helt på en rad.");
+            Console.WriteLine("\nAnge en text som du vill upprepa: ");
+            string input = Console.ReadLine() ?? "";
+
+            if (input != string.Empty)
+            {
+                Console.WriteLine("\nDin inmatning upprepas 10 gånger:\n");
+                for (int i = 0; i < 10; i++)
+                {
+                    if (i < 9)
+                        Console.Write($"{i + 1}: {input}, ");
+                    else
+                        Console.Write($"{i + 1}: {input}.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Ingen inmatning att upprepa.");
+            }
             Console.ReadLine(); // bara för att användare ska få läsa resultatet innan gå tillbacka till huvudmeny
         }
     }
