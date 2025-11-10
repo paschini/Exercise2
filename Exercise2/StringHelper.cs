@@ -10,16 +10,16 @@ namespace Exercise2
     {
         public static string RepeatedInput(string input)
         {
-            string repeated = "";
+            StringBuilder repeated = new();
             for (int i = 0; i < 10; i++)
             {
                 if (i < 9)
-                    repeated += $"{i + 1}. {input}, ";
+                    repeated.Append($"{i + 1}. {input}, ");
                 else
-                    repeated += $"{i + 1}. {input}.";
+                    repeated.Append($"{i + 1}. {input}.");
             }
 
-            return repeated;
+            return repeated.ToString();
         }
 
         public static string[] SplitBySpaces(string input)

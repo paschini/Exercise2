@@ -120,7 +120,8 @@
             }
 
             Console.WriteLine($"\nTotala priset för gruppen med {numberOfPeople} personner är: {totalPrice:C2}.");
-            Console.ReadLine(); // bara för att användare ska få läsa resultatet innan gå tillbacka till huvudmeny
+            // bara för att användare ska få läsa resultatet innan gå tillbacka till huvudmeny
+            Console.ReadLine();
         }
 
         private static void RepeatInput()
@@ -141,7 +142,9 @@
             {
                 Console.WriteLine("Ingen inmatning att upprepa.");
             }
-            Console.ReadLine(); // bara för att användare ska få läsa resultatet innan gå tillbacka till huvudmeny
+
+            // bara för att användare ska få läsa resultatet innan gå tillbacka till huvudmeny
+            Console.ReadLine(); 
         }
 
         private static void Find3rdWord()
@@ -168,7 +171,9 @@
                     Console.ReadLine();
                 }
             }
-            Console.ReadLine(); // bara för att användare ska få läsa resultatet innan gå tillbacka till huvudmeny
+
+            // bara för att användare ska få läsa resultatet innan gå tillbacka till huvudmeny
+            Console.ReadLine(); 
         }
     }
 }
