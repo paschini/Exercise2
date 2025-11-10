@@ -144,7 +144,7 @@
             }
 
             // bara för att användare ska få läsa resultatet innan gå tillbacka till huvudmeny
-            Console.ReadLine(); 
+            Console.ReadLine();
         }
 
         private static void Find3rdWord()
@@ -173,7 +173,7 @@
             }
 
             // bara för att användare ska få läsa resultatet innan gå tillbacka till huvudmeny
-            Console.ReadLine(); 
+            Console.ReadLine();
         }
     }
 }
