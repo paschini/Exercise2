@@ -133,13 +133,9 @@
             if (input != string.Empty)
             {
                 Console.WriteLine("\nDin inmatning upprepas 10 gånger:\n");
-                for (int i = 0; i < 10; i++)
-                {
-                    if (i < 9)
-                        Console.Write($"{i + 1}. {input}, ");
-                    else
-                        Console.Write($"{i + 1}. {input}.");
-                }
+                string repeatedInputs = StringHelper.RepeatedInput(input);
+                
+                Console.WriteLine(repeatedInputs);
             }
             else
             {
@@ -158,11 +154,11 @@
                 Console.Write("\nAnge en mening med minst 3 ord: ");
 
                 string input = Console.ReadLine() ?? "";
-                string[] words = input.Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+                string? thirdWord = StringHelper.Get3rdWord(input);
 
-                if (words.Length >= 3)
+                if (thirdWord != null)
                 {
-                    Console.WriteLine($"Det 3:e ordet i din mening är: \"{words[2]}\".");
+                    Console.WriteLine($"Det 3:e ordet i din mening är: \"{thirdWord}\".");
                     exitFunction = true;
                 }
                 else
