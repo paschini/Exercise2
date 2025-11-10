@@ -134,7 +134,7 @@
             {
                 Console.WriteLine("\nDin inmatning upprepas 10 gånger:\n");
                 string repeatedInputs = StringHelper.RepeatedInput(input);
-                
+
                 Console.WriteLine(repeatedInputs);
             }
             else

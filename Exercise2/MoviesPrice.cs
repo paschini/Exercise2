@@ -47,7 +47,7 @@ namespace Exercise2
                 result.Price = retiredPrice;
                 result.Message = $"Personen är berättigad till pensionärspris: {result.Price:C2}";
                 return result;
-            }            
+            }
             else
             {
                 result.Price = standardPrice;

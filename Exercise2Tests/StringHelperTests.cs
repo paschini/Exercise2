@@ -36,7 +36,7 @@ namespace Exercise2.Tests
         {
             string input = "  This is   a test string  ";
             string expectedOutput = "a";
-            
+
             string? actualOutput = StringHelper.Get3rdWord(input);
             Assert.AreEqual(expectedOutput, actualOutput);
         }
@@ -45,7 +45,7 @@ namespace Exercise2.Tests
         public void Get3rdWordTest_InsufficientWords_ReturnsNull()
         {
             string input = "Too short";
-            
+
             string? actualOutput = StringHelper.Get3rdWord(input);
             Assert.IsNull(actualOutput);
         }
