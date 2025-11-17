@@ -1,6 +1,6 @@
 ﻿# C# övning - Flöde via loopar och strängmanipulation
 
-> [!Important]
+> [!IMPORTANT]
 > ## OBS - Resultatet av övningen skall visas för lärare och godkännas innan den kan anses vara genomförd.
 > ### Övningen kan skrivas helt i programklassen med menyn i Main-metoden.
 
