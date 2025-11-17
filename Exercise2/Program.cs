@@ -63,9 +63,10 @@
                 Console.WriteLine("--------------------------------------------------------------");
                 Console.WriteLine("Pris till (E)n person eller få en antal pris till (F)lera? \nSkriva E eller F. Skriva nått annat för att gå tillbacka.");
                 choice = Console.ReadLine() ?? "E";
-                while (!(choice.ToUpper() == "E") || (choice.ToUpper() == "F"))
+                while (!(choice.ToUpper() == "E" || choice.ToUpper() == "F"))
                 {
-                    Console.Write("Ogiltig inmatning. Vänligen ange en giltig nummer av personer: ");
+                    Console.Write("Ogiltig inmatning. Vänligen ange E till 1 person eller F till 2 personer eller mer: ");
+                    choice = Console.ReadLine() ?? "E";
                 }
 
                 if (choice.ToUpper() == "E")
@@ -79,7 +80,7 @@
                     }
 
                     Console.WriteLine(MoviesPrice.CalculatePersonPrice(age).Message);
-                    Console.Write($"Testa en till persons ålder? Trycka på Y eller N: ");
+                    Console.Write($"Räkna Bio pris igen? [Y]es eller [N]o: ");
                     choice = Console.ReadLine() ?? "N";
                 }
                 else if (choice.ToUpper() == "F")
